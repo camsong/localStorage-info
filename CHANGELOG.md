@@ -1,3 +1,3 @@
-0.1.0 / 2015-11-22
+1.0.0 / 2016-10-22
 ==================
-- Add description here
+- First release
