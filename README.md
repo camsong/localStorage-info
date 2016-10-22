@@ -1,32 +1,42 @@
-# Storex [![Build Status](https://travis-ci.org/camsong/babel-npm-boilerplate.svg)](https://travis-ci.org/camsong/babel-npm-boilerplate) [![npm version](https://badge.fury.io/js/babel-npm-boilerplate.svg)](http://badge.fury.io/js/babel-npm-boilerplate)
+# localStorage Info [![Build Status](https://travis-ci.org/camsong/localStorage-info.svg)](https://travis-ci.org/camsong/localStorage-info) [![npm version](https://badge.fury.io/js/localStorage-info.svg)](http://badge.fury.io/js/localStorage-info) [![Coverage Status](https://coveralls.io/repos/github/camsong/localStorage-info/badge.svg?branch=master)](https://coveralls.io/github/camsong/localStorage-info?branch=master)
 
-An LRU cache to be used with pluggable storage mechanism
-
-## What's inside
-
-Minimal structure for a npm package source.
-
-* Babel 6
-* Mocha
-* ESLint
-* Isparta
+Get to know localStorage size & more
 
 ## Installation
 
-Clone this repo or download using `npm`
+Install via NPM or yarn:
 
 ```
-npm install babel-npm-boilerplate --save
+npm i localStorage-info
 ```
 
 ## Usage
+```
+import { getInfo } from 'localStorage-info';
+console.log(getInfo());
+```
 
-* `npm run test` to run tests
-* `npm run test-cov` to generate test coverage
-* `npm run build` to transform es6/es7 to es5 by Babel
-* `npm run clean` to clean `build/` directory
-* `npm run lint` to lint js using ESLint in Airbnb's Javascript style
+The output is like:
+```js
+{
+  support: true,            // support localStorage
+  size: 5242879,            // full size in bytes
+  humanSize: '5.00 MB',     // full size in human readable format
+  usedSize: 1703936,        // used size in bytes
+  humanUsedSize: '1.63 MB', // used size in human readable format
+  usedPercentage: '32.50%', // percentage of used size
+  freeSize: 3538943,        // free size in bytes
+  humanFreeSize: '3.37 MB', // free size in human readable format
+  freePercentage: '67.50%'  // percentage of free size
+}
+```
 
-## Liscense
+The size of latest version of Chrome and Firefox are 5 MB, Safari is 2.5 MB.
+
+## Caveats:
+
+This library get localStorage size by adding data in localStorage, so it may be slow, usually **1 second** to run. So you may not use it in crucial application.
+
+## License
 
 MIT

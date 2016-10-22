@@ -1,6 +1,11 @@
 {
   "presets": ["es2015", "stage-0"],
-  "rules": {
-    
+  "env": {
+    "development": {
+      "plugins": []
+    },
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
   }
 }
