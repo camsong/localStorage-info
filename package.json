@@ -1,7 +1,7 @@
 {
   "name": "localStorage-info",
   "author": "Cam Song",
-  "version": "1.0.0-pre3",
+  "version": "1.0.0",
   "description": "Get to know localStorage size & more",
   "main": "build/index.js",
   "keywords": [
