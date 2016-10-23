@@ -54,21 +54,39 @@ function getUsedSize() {
 function getFreeSize() {
   var time = Date.now();
   var freeSize = null;
-  // generate 2M length of string
-  var block = Array(1024 * 1024 * 1).join('s');
-  localStorage.setItem(CACHE_KEY, block);
+  // generate a block of string
+  var block = Array(1024 * 10).join('s');
+
+  var tryList = [];
 
   function _tryIncrease() {
     if (block.length < 1) {
-      freeSize = localStorage.getItem(CACHE_KEY).length + CACHE_KEY.length;
+      // freeSize = localStorage.getItem(CACHE_KEY).length + CACHE_KEY.length;
+      freeSize = tryList.reduce(function (result, curr) {
+        result += curr;
+        return result;
+      }, 0);
+      // remove added data
+      for (var i = 0; i < tryList.length; i++) {
+        localStorage.removeItem(CACHE_KEY + i);
+      }
       return;
     }
     try {
-      localStorage.setItem(CACHE_KEY, localStorage.getItem(CACHE_KEY) + block);
-
+      var theKey = CACHE_KEY + tryList.length;
+      // if less than 20, add to previous cache, because the key has length
+      if (block.length > 20) {
+        localStorage.setItem(theKey, block);
+        tryList.push(theKey.length + block.length);
+      } else {
+        theKey = CACHE_KEY + (tryList.length - 1); // use previous key
+        var theValue = localStorage.getItem(theKey) + block;
+        localStorage.setItem(theKey, theValue);
+        tryList[tryList.length - 1] = theKey.length + theValue.length;
+      }
       _tryIncrease();
     } catch (e) {
-      block = Array(Math.floor(block.length / 2)).join('x');
+      block = Array(Math.ceil(block.length / 2)).join('s');
       _tryIncrease();
     }
   }

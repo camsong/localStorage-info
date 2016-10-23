@@ -1,9 +1,9 @@
 {
   "name": "localStorage-info",
   "author": "Cam Song",
-  "version": "1.0.0-pre",
+  "version": "1.0.0-pre3",
   "description": "Get to know localStorage size & more",
-  "main": "build/storex.js",
+  "main": "build/index.js",
   "keywords": [
     "localStorage",
     "localStorage info",
